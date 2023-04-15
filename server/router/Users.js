@@ -23,9 +23,7 @@ router.post("/register", async ( req, res ) => {
         }).then(() => {
             res.json("Registration Complete");
         }).catch(( err ) => {
-            if(err){
-                req.json({error: err.message});
-            }
+            res.json(err.message);
         });
     })
 });
