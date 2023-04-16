@@ -18,10 +18,6 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    //login
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPassword, setLoginPassword] = useState("");
-
     const onSubmit = (event) => {
         event.preventDefault();
 
@@ -35,7 +31,7 @@ function Login() {
             axios.post("http://localhost:3001/register", data, { withCredentials: true } ).then((response) => {
                 if(response.data.error){
                     console.log(response.data.error);
-                    alert("Hoy may error nakimas kaman");
+                    alert("Invalid credentials");
                 }else{
                     alert("Registration Complete!");
                     navigate("/Login");
@@ -49,14 +45,15 @@ function Login() {
 
     const login = () => {
         const data = {
-            email,
-            password
+            email: email,
+            password: password
         };
 
         axios.post("http://localhost:3001/login", data, { withCredentials: true }).then((response) => {
             if(response.data.error){
-                console.log(response.data.error);
+                console.log(response.data);
                 alert("ano nakimas kaman");
+                navigate("/Login");
             }else{
                 alert("Login success");
                 navigate("/");
@@ -124,7 +121,7 @@ function Login() {
                                     onChange={(event) => setEmail(event.target.value)}
                                     className="w-full h-10 px-4 text-lg peer bg-transparent outline-none border-b-2 border-white rounded"
                                 />
-                                <label for="loginEmail" className="transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-lg group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0">Email</label>
+                                <label htmlFor="loginEmail" className="transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-lg group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0">Email</label>
                             </div>
                             <div className="w-full relative group md:mb-10">
                                 <input 
@@ -135,7 +132,7 @@ function Login() {
                                     onChange={(event) => setPassword(event.target.value)}
                                     className="w-full h-10 px-4 text-lg peer bg-transparent outline-none border-b-2 border-white rounded"
                                 />
-                                <label for="loginPassword" className="transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-lg group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0">Password</label>
+                                <label htmlFor="loginPassword" className="transform transition-all absolute top-0 left-0 h-full flex items-center pl-2 text-lg group-focus-within:text-xs peer-valid:text-xs group-focus-within:h-1/2 peer-valid:h-1/2 group-focus-within:-translate-y-full peer-valid:-translate-y-full group-focus-within:pl-0 peer-valid:pl-0">Password</label>
                             </div>
                             <button type="submit" className="uppercase bg-[#00BDF9] w-full rounded md:py-2">log in</button>
                         </form>
