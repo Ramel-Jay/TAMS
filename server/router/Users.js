@@ -11,6 +11,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
+router.get('/home', validateToken, async (req, res) => {
+    res.json("user Authenticated");
+});
+
 //Post Register Request
 router.post("/register", async ( req, res ) => {
     const { fullName, email, password } = req.body;
